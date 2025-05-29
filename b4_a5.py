@@ -7,4 +7,4 @@ def S(n : int, m : int) -> int:
     return S(n-1, m-1) + m*S(n-1, m)
 
 if __name__ == '__main__':
-    print(S(5, 3))
+    print(f"S(5,3) = {S(5, 3)}")
