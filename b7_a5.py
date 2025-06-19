@@ -38,8 +38,6 @@ def avgLaufzeit(m, n):
     erw = n*math.log(n, math.e)
     print("n: ", n, " avg Laufzeit: ", avg, " O(n*ln(n)): ", erw , " Verhältnis: ", avg/erw)
 
-
-if __name__ == "__main__":
-    for i in [50, 75, 100, 200, 250, 500, 1000, 1500, 2000, 2500, 5000]:
-        # sortiert 10000 Listen mit i zufälligen Elementen
-        avgLaufzeit(10000, i)
+for i in [50, 75, 100, 200, 250, 500, 1000, 1500, 2000, 2500, 5000]:
+    # sortiert 10000 Listen mit i zufälligen Elementen
+    avgLaufzeit(10000, i)
