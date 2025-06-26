@@ -12,7 +12,7 @@ def testMatrixMultMC(a:list[list], b:list[list], c:list[list]) -> bool:
     arra = numpy.array(a) # n x n
     arrb = numpy.array(b) # n x n
     arrc = numpy.array(c) # n x n
-    arrx = numpy.array(x) # n x 1
+    arrx = numpy.array(x) # n x 1 / Vektor
 
     # (n x n)*(n x 1) -> (n x 1) => O(n^2) nach Aufgabe 1
     bx = numpy.matmul(arrb, arrx)
