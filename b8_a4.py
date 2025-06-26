@@ -1,32 +1,35 @@
 import random
-import numpy
+
+def matVek(a: list[list], b: list[list]) -> list[list]:
+    n = len(a)
+    res = [[0] for _ in range(n)]
+    for i in range(n):
+        for ii in range(n):
+            res[i][0] = res[i][0] + (a[i][ii] * b[ii][0])
+    return res
 
 # einseitiger Fehler kein false negativ
 def testMatrixMultMC(a:list[list], b:list[list], c:list[list]) -> bool:
-    # Laufzeit O(n^2) + O(n^2) + O(n^2) = O(n^2)
+    # Laufzeit/Multiplikationen 3*O(n^2) = O(n^2)
 
     n = len(a)
 
-    x = [[random.choice([-1, 1])] for _ in range(n)]
+    x = [[random.choice([-1, 1])] for _ in range(n)] # n x 1 / Vektor ({-1, 1}^n)
 
-    arra = numpy.array(a) # n x n
-    arrb = numpy.array(b) # n x n
-    arrc = numpy.array(c) # n x n
-    arrx = numpy.array(x) # n x 1 / Vektor
+    # Matrix * Vektor => O(n^2)
+    bx = matVek(b, x)
 
-    # (n x n)*(n x 1) -> (n x 1) => O(n^2) nach Aufgabe 1
-    bx = numpy.matmul(arrb, arrx)
+    # Matrix * Vektor => O(n^2)
+    abx = matVek(a, bx)
 
-    # (n x n)*(n x 1) -> (n x 1) => O(n^2) nach Aufgabe 1
-    abx = numpy.matmul(arra, bx)
+    # Matrix * Vektor => O(n^2)
+    cx = matVek(c, x)
 
-    # (n x n)*(n x 1) -> (n x 1) => O(n^2) nach Aufgabe 1
-    cx = numpy.matmul(arrc, arrx)
-
-    return numpy.array_equal(abx, cx)
+    return abx == cx
 
 
 if __name__ == "__main__":
+    import numpy
     a = [[random.randint(0, 10) for _ in range(4)] for _ in range(4)]
     b = [[random.randint(0, 10) for _ in range(4)] for _ in range(4)]
     c = numpy.matmul(numpy.array(a), numpy.array(b)).tolist()
@@ -72,4 +75,3 @@ if __name__ == "__main__":
     print("a*b=c? ist", end=" ")
     for _ in range(10):
         print(testMatrixMultMC(a, b, c), end=", ")
-    print("\n")
