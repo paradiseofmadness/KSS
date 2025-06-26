@@ -3,11 +3,11 @@ import numpy
 
 # einseitiger Fehler kein false negativ
 def testMatrixMultMC(a:list[list], b:list[list], c:list[list]) -> bool:
-    # Laufzeit O(n) + O(n^2) + O(n^2) + O(n^2) + O(n) = O(n^2)
+    # Laufzeit O(n^2) + O(n^2) + O(n^2) = O(n^2)
 
     n = len(a)
 
-    x = [[random.choice([-1, 1])] for _ in range(n)] # O(n)
+    x = [[random.choice([-1, 1])] for _ in range(n)]
 
     arra = numpy.array(a) # n x n
     arrb = numpy.array(b) # n x n
@@ -23,7 +23,6 @@ def testMatrixMultMC(a:list[list], b:list[list], c:list[list]) -> bool:
     # (n x n)*(n x 1) -> (n x 1) => O(n^2) nach Aufgabe 1
     cx = numpy.matmul(arrc, arrx)
 
-    # Vergleiche n x 1 mit n x 1 Stellenweise => O(n)
     return numpy.array_equal(abx, cx)
 
 
